@@ -69,9 +69,8 @@ function CareerPrediction() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // TODO: Replace with actual athlete ID
-    const athleteId = 1;
-    fetch(`http://localhost:3000/api/athletes/${athleteId}/career-prediction`)
+    // Fetch career prediction data
+    fetch(`http://localhost:3000/api/athletes/1/career-prediction`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
@@ -128,7 +127,7 @@ function CareerPrediction() {
               <Typography variant="h5" gutterBottom>
                 Career Potential Score
               </Typography>
-              <CircularProgressWithLabel value={prediction.potential_score} />
+              <CircularProgressWithLabel value={prediction?.potential_score || 0} />
             </CardContent>
           </StyledCard>
         </Grid>
@@ -141,7 +140,7 @@ function CareerPrediction() {
                 Recommended Career Paths
               </Typography>
               <List>
-                {prediction.career_paths.map((path, index) => (
+                {(prediction?.career_paths || []).map((path, index) => (
                   <ListItem key={index}>
                     <ListItemIcon>
                       <EmojiEvents color="primary" />
@@ -167,7 +166,7 @@ function CareerPrediction() {
                     <Timeline color="primary" sx={{ fontSize: 40 }} />
                     <Typography variant="h6">Performance Level</Typography>
                     <Typography variant="h4" color="primary">
-                      {prediction.factors.performance_level}
+                      {prediction?.factors?.performance_level || 0}
                     </Typography>
                   </Box>
                 </Grid>
@@ -176,7 +175,7 @@ function CareerPrediction() {
                     <Star color="primary" sx={{ fontSize: 40 }} />
                     <Typography variant="h6">Consistency</Typography>
                     <Typography variant="h4" color="primary">
-                      {prediction.factors.consistency}
+                      {prediction?.factors?.consistency || 0}
                     </Typography>
                   </Box>
                 </Grid>
@@ -185,7 +184,7 @@ function CareerPrediction() {
                     <FitnessCenter color="primary" sx={{ fontSize: 40 }} />
                     <Typography variant="h6">Training Score</Typography>
                     <Typography variant="h4" color="primary">
-                      {prediction.factors.training_dedication}
+                      {prediction?.factors?.training_dedication || 0}
                     </Typography>
                   </Box>
                 </Grid>
@@ -194,7 +193,7 @@ function CareerPrediction() {
                     <LocalHospital color="primary" sx={{ fontSize: 40 }} />
                     <Typography variant="h6">Injury Risk</Typography>
                     <Typography variant="h4" color="primary">
-                      {prediction.factors.injury_risk}
+                      {prediction?.factors?.injury_risk || 0}
                     </Typography>
                   </Box>
                 </Grid>
