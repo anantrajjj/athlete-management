@@ -8,6 +8,7 @@ import Performance from './pages/Performance';
 import Injuries from './pages/Injuries';
 import Training from './pages/Training';
 import Finance from './pages/Finance';
+import CareerPrediction from './pages/CareerPrediction';
 
 const theme = createTheme({
   palette: {
@@ -33,6 +34,7 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/athletes" element={<Athletes />} />
               <Route path="/performance" element={<Performance />} />
+              <Route path="/career" element={<CareerPrediction />} />
               <Route path="/injuries" element={<Injuries />} />
               <Route path="/training" element={<Training />} />
               <Route path="/finance" element={<Finance />} />
