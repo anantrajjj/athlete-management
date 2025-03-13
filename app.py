@@ -1,6 +1,6 @@
 import streamlit as st
 import os
-from modules import athlete, performance, injury, training, finance, analytics
+from app_modules import athlete, performance, injury, training, finance, analytics
 
 # Create data directory if it doesn't exist
 os.makedirs("data", exist_ok=True)
