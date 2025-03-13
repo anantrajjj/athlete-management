@@ -72,7 +72,12 @@ function CareerPrediction() {
     // TODO: Replace with actual athlete ID
     const athleteId = 1;
     fetch(`http://localhost:3000/api/athletes/${athleteId}/career-prediction`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => {
         if (data.error) {
           setError(data.error);
@@ -82,7 +87,8 @@ function CareerPrediction() {
         setLoading(false);
       })
       .catch((err) => {
-        setError('Failed to fetch career prediction');
+        console.error('Error fetching career prediction:', err);
+        setError('Failed to fetch career prediction. Please try again later.');
         setLoading(false);
       });
   }, []);
@@ -96,7 +102,16 @@ function CareerPrediction() {
   }
 
   if (error) {
-    return <Alert severity="error">{error}</Alert>;
+    return (
+      <Box p={3}>
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+        <Typography variant="body1" color="text.secondary">
+          Please ensure that athlete data is available and try again.
+        </Typography>
+      </Box>
+    );
   }
 
   return (
@@ -104,7 +119,7 @@ function CareerPrediction() {
       <Typography variant="h4" gutterBottom fontWeight="bold" color="primary">
         Career Prediction Analysis
       </Typography>
-      
+
       <Grid container spacing={4}>
         {/* Potential Score Card */}
         <Grid item xs={12} md={6}>
